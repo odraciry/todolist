@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="506.0" prefWidth="486.0" style="-fx-background-color: BlueViolet;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.IndexController">
+   <children>
+      <Button id="btConcluido" fx:id="btConcluir" ellipsisString="" layoutX="40.0" layoutY="414.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="52.0" style="-fx-background-color: BlueViolet;" text="Button" AnchorPane.bottomAnchor="33.0">
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../bin/br/com/todolist/imagem/lista-de-afazeres.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="btAdiar" fx:id="btAdiar" ellipsisString="" layoutX="121.0" layoutY="410.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: BlueViolet;" text="Button" AnchorPane.bottomAnchor="33.0">
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../bin/br/com/todolist/imagem/calendario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="btLipar" fx:id="btApagar" ellipsisString="" layoutX="206.0" layoutY="410.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="69.0" style="-fx-background-color: BlueViolet;" text="Button" AnchorPane.bottomAnchor="33.0">
+         <graphic>
+            <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../bin/br/com/todolist/imagem/borracha.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="btExcluir" fx:id="btExcluir" ellipsisString="" layoutX="289.0" layoutY="414.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="52.0" style="-fx-background-color: BlueViolet;" text="Button" AnchorPane.bottomAnchor="33.0">
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../bin/br/com/todolist/imagem/excluir.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button ellipsisString="" layoutX="394.0" layoutY="412.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="69.0" style="-fx-background-color: BlueViolet;" text="Button" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="35.0">
+         <graphic>
+            <ImageView id="btSave" fx:id="btSave" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../bin/br/com/todolist/imagem/marca-paginas.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="45.0" layoutY="71.0" prefHeight="21.0" prefWidth="150.0" text="Nome da Tarefa:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label layoutX="41.0" layoutY="144.0" prefHeight="21.0" prefWidth="150.0" text="Data de Finalização:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField layoutX="40.0" layoutY="98.0" prefHeight="25.0" prefWidth="400.0" promptText="Digite..." AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="98.0" />
+      <DatePicker layoutX="40.0" layoutY="168.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="40.0" />
+      <Label layoutX="44.0" layoutY="243.0" prefHeight="17.0" prefWidth="180.0" text="Descrição da Tarefa:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextArea layoutX="39.0" layoutY="271.0" prefHeight="117.0" prefWidth="400.0" promptText="Descreva a sua Tarefa..." AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="39.0" />
+      <Label layoutX="289.0" layoutY="144.0" prefHeight="17.0" prefWidth="150.0" text="Grau de importância:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <ComboBox layoutX="289.0" layoutY="168.0" prefWidth="150.0" />
+      <Label layoutX="195.0" layoutY="23.0" prefHeight="48.0" prefWidth="114.0" text="Tarefas" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
