@@ -19,10 +19,10 @@ public class Tarefa {
 		return importancia;
 	}
 	/**
-	 * @param importancia the importancia to set
+	 * @param object the importancia to set
 	 */
-	public void setImportancia(StatusTarefa importancia) {
-		this.importancia = importancia;
+	public void setImportancia(Object object) {
+		this.importancia = (StatusTarefa) object;
 	}
 	/**
 	 * @return the id
