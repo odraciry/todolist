@@ -1,6 +1,8 @@
 package br.com.todolist.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public class Tarefa {
 	private long id;
@@ -10,19 +12,19 @@ public class Tarefa {
 	private String descricao;
 	private String comentarios;
 	private StatusTarefa status;
-	private StatusTarefa importancia;
+	private GrauImportancia importancia;
 	
 	/**
 	 * @return the importancia
 	 */
-	public StatusTarefa getImportancia() {
+	public GrauImportancia getImportancia() {
 		return importancia;
 	}
 	/**
 	 * @param object the importancia to set
 	 */
-	public void setImportancia(Object object) {
-		this.importancia = (StatusTarefa) object;
+	public void setImportancia(GrauImportancia object) {
+		this.importancia = object;
 	}
 	/**
 	 * @return the id
@@ -109,4 +111,19 @@ public class Tarefa {
 		this.status = status;
 	}
 	
+	public String formatToSave() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.getId()+";");
+		DateTimeFormatter padraoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		builder.append(this.getDataCriacao().format(padraoData)+";");
+		builder.append(this.getDataLimite().format(padraoData)+";");
+		if(this.getDataConcluida() != null) {
+			builder.append(this.getDataConcluida().format(padraoData));
+		}
+		builder.append(";");
+		builder.append(this.getDescricao()+";");
+		builder.append(this.getComentarios()+";");
+		builder.append(this.getStatus().ordinal()+"\n");
+		return builder.toString();
+	}
 }
