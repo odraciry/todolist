@@ -1,11 +1,15 @@
 package br.com.todolist.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import br.com.todolist.io.TarefaIO;
 import br.com.todolist.model.GrauImportancia;
 import br.com.todolist.model.StatusTarefa;
 import br.com.todolist.model.Tarefa;
@@ -15,19 +19,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class IndexController implements Initializable {
-	
-	
-	@FXML
-	private ImageView btSave;
+public class IndexController implements Initializable{
 
 	@FXML
 	private TextField tfName;
-
+	
+	@FXML
+	private TableColumn<Tarefa, LocalDate> tcData;
+	
+	@FXML
+	private TableColumn<Tarefa, String> tcTarefa;
+	
+	@FXML
+	private TableColumn<Tarefa, GrauImportancia> tcImportancia;
+	
+	@FXML
+	private TableView<Tarefa> tvTarefa;
+	
 	@FXML
 	private DatePicker dpData;
 
@@ -37,6 +51,7 @@ public class IndexController implements Initializable {
 	@FXML
 	private ComboBox<GrauImportancia> cbImportancia;
 
+	private List<Tarefa> tarefas;
 	private Tarefa tarefa;
 
 	@FXML
@@ -87,10 +102,16 @@ public class IndexController implements Initializable {
 			tarefa.setImportancia(cbImportancia.getValue());
 
 			System.out.println(tarefa.formatToSave());
-			// TODO inserir no banco d dados
-
-			// Limpar os Campos
-			limpar();
+			// TODO inserir no banco de dados
+			try {
+				TarefaIO.insert(tarefa);
+				// Limpar os Campos
+				limpar();
+			}catch(FileNotFoundException e){
+			JOptionPane.showMessageDialog(null, "Arquivo não encontrado: "+e.getMessage(),"Erro", JOptionPane.ERROR_MESSAGE);	
+			}catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Arquivo não encontrado: "+e.getMessage(),"Erro", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
@@ -107,6 +128,21 @@ public class IndexController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbImportancia.setItems(FXCollections.observableArrayList(GrauImportancia.values()));
-		
+		 
+		//definir os parametros para as colunas do tableview
+		tcData.setCellValueFactory(new PropertyValueFactory<>("dataLimite"));
+		tcTarefa.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tcImportancia.setCellValueFactory(new PropertyValueFactory<>("importancia"));
+		carregarTarefas();
+	}
+	
+	public void carregarTarefas() {
+		try {
+			tarefas = TarefaIO.readTarefa();
+			tvTarefa.setItems(FXCollections.observableArrayList(tarefas));
+			tvTarefa.refresh();
+		} catch (IOException e) {
+			JOptionPane.showConfirmDialog(null, "Erro ao carregar as tarefas"+e.getMessage(),"Erro", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

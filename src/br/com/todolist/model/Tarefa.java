@@ -121,6 +121,8 @@ public class Tarefa {
 			builder.append(this.getDataConcluida().format(padraoData));
 		}
 		builder.append(";");
+		builder.append(this.getImportancia().ordinal());
+		builder.append(";");
 		builder.append(this.getDescricao()+";");
 		builder.append(this.getComentarios()+";");
 		builder.append(this.getStatus().ordinal()+"\n");

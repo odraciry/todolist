@@ -14,7 +14,7 @@ public class Main extends Application {
 		try {
 			TarefaIO.creatFiles();
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../view/Index.fxml"));
-			Scene scene = new Scene(root,490,500);
+			Scene scene = new Scene(root,798,506);
 			scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -22,6 +22,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public static void main(String[] args) {
 		launch(args);

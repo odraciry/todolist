@@ -1,12 +1,21 @@
 package br.com.todolist.io;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import br.com.todolist.model.GrauImportancia;
+import br.com.todolist.model.StatusTarefa;
 import br.com.todolist.model.Tarefa;
+import sun.misc.ObjectInputFilter.Status;
 
 public class TarefaIO {
 	private static final String FOLDER = System.getProperty("user.home") + "/todolist";
@@ -44,6 +53,40 @@ public class TarefaIO {
 		// gravar o novo id no arquivo de id
 		writer = new FileWriter(arqId);
 		writer.write((tarefa.getId() + 1)+"");
-		
+		writer.close();
+	}
+	
+	public static List<Tarefa> readTarefa() throws IOException{
+		File arqTarefa = new File(FILE_TAREFA);
+		List<Tarefa> tarefas = new ArrayList<>();
+		FileReader reader = new FileReader(arqTarefa);
+		BufferedReader buff = new BufferedReader(reader);
+		String linha;
+		while((linha = buff.readLine()) != null){
+			String[] vetor = linha.split(";");
+			Tarefa t = new Tarefa();
+			t.setId(Long.parseLong(vetor[0]));
+			DateTimeFormatter padraoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			t.setDataCriacao(LocalDate.parse(vetor[1], padraoData));
+			t.setDataLimite(LocalDate.parse(vetor[2], padraoData));
+			if(!vetor[3].isEmpty()) {
+				t.setDataConcluida(LocalDate.parse(vetor[3]));
+			}
+			int indImportancia = Integer.parseInt(vetor[4]);
+			t.setImportancia(GrauImportancia.values()[indImportancia]);
+			t.setDescricao(vetor[5]);
+			t.setComentarios(vetor[6]);
+			int indStatus = Integer.parseInt(vetor [7]);
+			t.setStatus(StatusTarefa.values()[indStatus]);
+			tarefas.add(t);
+		}
+		reader.close();
+		buff.close();
+		System.out.println(tarefas.size());
+		return tarefas;
 	}
 }
+
+
+
+

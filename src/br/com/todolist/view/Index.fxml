@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="506.0" prefWidth="486.0" style="-fx-background-color: #2D333B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.IndexController">
+<AnchorPane prefHeight="506.0" prefWidth="798.0" style="-fx-background-color: #2D333B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.IndexController">
    <children>
       <Button id="btConcluido" ellipsisString="" layoutX="40.0" layoutY="414.0" mnemonicParsing="false" onAction="#btConcluirClick" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
          <graphic>
@@ -49,9 +51,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button ellipsisString="" layoutX="375.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="36.0">
+      <Button ellipsisString="" layoutX="384.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="339.0">
          <graphic>
-            <ImageView id="btSave" fx:id="btSave" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="btSave" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../bin/br/com/todolist/imagem/marca-paginas.png" />
                </image>
@@ -83,5 +85,12 @@
             <Font name="Comic Sans MS" size="27.0" />
          </font>
       </Label>
+      <TableView fx:id="tvTarefa" layoutX="504.0" layoutY="47.0" prefHeight="433.0" prefWidth="256.0">
+        <columns>
+          <TableColumn fx:id="tcData" prefWidth="75.0" text="Data" />
+          <TableColumn fx:id="tcTarefa" prefWidth="75.0" text="Tarefa" />
+            <TableColumn fx:id="tcImportancia" prefWidth="105.0" text="Importância" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
