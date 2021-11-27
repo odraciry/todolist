@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="506.0" prefWidth="798.0" style="-fx-background-color: #2D333B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.IndexController">
+<AnchorPane prefHeight="506.0" prefWidth="814.0" style="-fx-background-color: #2D333B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.IndexController">
    <children>
-      <Button id="btConcluido" ellipsisString="" layoutX="40.0" layoutY="414.0" mnemonicParsing="false" onAction="#btConcluirClick" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
+      <Button id="btConcluido" fx:id="btConcluido" disable="true" ellipsisString="" layoutX="40.0" layoutY="414.0" mnemonicParsing="false" onAction="#btConcluirClick" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
          <graphic>
             <ImageView fitHeight="55.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -24,7 +24,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="btAdiar" ellipsisString="" layoutX="121.0" layoutY="410.0" mnemonicParsing="false" onAction="#btAdiarClick" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
+      <Button id="btAdiar" fx:id="btAdiar" disable="true" ellipsisString="" layoutX="121.0" layoutY="410.0" mnemonicParsing="false" onAction="#btAdiarClick" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
          <graphic>
             <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,7 +33,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="btLipar" ellipsisString="" layoutX="206.0" layoutY="410.0" mnemonicParsing="false" onAction="#btApagarClick" prefHeight="63.0" prefWidth="69.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
+      <Button id="btLipar" fx:id="btLimpar" ellipsisString="" layoutX="206.0" layoutY="410.0" mnemonicParsing="false" onAction="#btApagarClick" prefHeight="63.0" prefWidth="69.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
          <graphic>
             <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -42,7 +42,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="btExcluir" ellipsisString="" layoutX="289.0" layoutY="414.0" mnemonicParsing="false" onAction="#btExcluirClick" prefHeight="63.0" prefWidth="71.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
+      <Button id="btExcluir" fx:id="btExcluir" disable="true" ellipsisString="" layoutX="289.0" layoutY="414.0" mnemonicParsing="false" onAction="#btExcluirClick" prefHeight="63.0" prefWidth="71.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="33.0">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,7 +51,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button ellipsisString="" layoutX="384.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="339.0">
+      <Button fx:id="btSalvar" ellipsisString="" layoutX="384.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="339.0">
          <graphic>
             <ImageView id="btSave" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,33 +64,45 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="41.0" layoutY="144.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Data de Finalização:">
+      <Label layoutX="41.0" layoutY="172.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Data de Finalização:">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextField fx:id="tfName" layoutX="40.0" layoutY="98.0" prefHeight="25.0" prefWidth="400.0" promptText="Digite..." AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="98.0" />
-      <DatePicker fx:id="dpData" layoutX="40.0" layoutY="168.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="40.0" />
+      <TextField fx:id="tfStatus" disable="true" layoutX="271.0" layoutY="105.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="105.0" />
+      <DatePicker fx:id="dpData" layoutX="40.0" layoutY="196.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="40.0" />
       <Label layoutX="44.0" layoutY="243.0" prefHeight="17.0" prefWidth="180.0" style="-fx-text-fill: #ADBAC7;" text="Descrição da Tarefa:">
          <font>
             <Font size="15.0" />
          </font></Label>
       <TextArea fx:id="lbDescricao" layoutX="39.0" layoutY="271.0" prefHeight="117.0" prefWidth="400.0" promptText="Descreva a sua Tarefa..." AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="39.0" />
-      <Label layoutX="289.0" layoutY="144.0" prefHeight="17.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Grau de importância:">
+      <Label layoutX="289.0" layoutY="172.0" prefHeight="17.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Grau de importância:">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <ComboBox fx:id="cbImportancia" layoutX="289.0" layoutY="168.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbImportancia" layoutX="289.0" layoutY="196.0" prefWidth="150.0" />
       <Label layoutX="195.0" layoutY="23.0" prefHeight="48.0" prefWidth="114.0" style="-fx-text-fill: #ADBAC7;" text="Tarefas" textAlignment="CENTER">
          <font>
             <Font name="Comic Sans MS" size="27.0" />
          </font>
       </Label>
-      <TableView fx:id="tvTarefa" layoutX="504.0" layoutY="47.0" prefHeight="433.0" prefWidth="256.0">
+      <TableView fx:id="tvTarefa" layoutX="472.0" layoutY="47.0" prefHeight="433.0" prefWidth="315.0">
         <columns>
-          <TableColumn fx:id="tcData" prefWidth="75.0" text="Data" />
-          <TableColumn fx:id="tcTarefa" prefWidth="75.0" text="Tarefa" />
-            <TableColumn fx:id="tcImportancia" prefWidth="105.0" text="Importância" />
+          <TableColumn fx:id="tcData" prefWidth="65.0" text="Data" />
+          <TableColumn fx:id="tcTarefa" prefWidth="66.0" text="Tarefa" />
+            <TableColumn fx:id="tcImportancia" prefWidth="98.0" text="Importância" />
+            <TableColumn fx:id="tcName" prefWidth="101.0" text="Nome" />
         </columns>
       </TableView>
+      <TextField fx:id="tfName" layoutX="41.0" layoutY="105.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." />
+      <Label layoutX="41.0" layoutY="82.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Nome:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="271.0" layoutY="82.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Status:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

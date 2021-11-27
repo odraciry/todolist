@@ -11,8 +11,21 @@ public class Tarefa {
 	private LocalDate dataConcluida;
 	private String descricao;
 	private String comentarios;
+	private String name;
 	private StatusTarefa status;
 	private GrauImportancia importancia;
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	/**
 	 * @return the importancia
@@ -125,7 +138,8 @@ public class Tarefa {
 		builder.append(";");
 		builder.append(this.getDescricao()+";");
 		builder.append(this.getComentarios()+";");
-		builder.append(this.getStatus().ordinal()+"\n");
+		builder.append(this.getStatus().ordinal()+";");
+		builder.append(this.getName()+";\n");
 		return builder.toString();
 	}
 }

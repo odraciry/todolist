@@ -77,7 +77,9 @@ public class TarefaIO {
 			t.setDescricao(vetor[5]);
 			t.setComentarios(vetor[6]);
 			int indStatus = Integer.parseInt(vetor [7]);
+			t.setName(vetor[8]);
 			t.setStatus(StatusTarefa.values()[indStatus]);
+			
 			tarefas.add(t);
 		}
 		reader.close();
