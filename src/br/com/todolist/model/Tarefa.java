@@ -124,6 +124,7 @@ public class Tarefa {
 		this.status = status;
 	}
 	
+	//transforma a tarefa em uma String para salvar
 	public String formatToSave() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.getId()+";");

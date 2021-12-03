@@ -51,7 +51,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btSalvar" ellipsisString="" layoutX="384.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="339.0">
+      <Button fx:id="btSalvar" ellipsisString="" layoutX="384.0" layoutY="404.0" mnemonicParsing="false" onAction="#btSaveClick" prefHeight="76.0" prefWidth="75.0" style="-fx-background-color: #4E5BA6;" text="Button" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="355.0">
          <graphic>
             <ImageView id="btSave" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,42 +64,47 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="41.0" layoutY="172.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Data de Finalização:">
+      <Label fx:id="lbFinalizacao" layoutX="272.0" layoutY="176.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Data para Finalização:">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextField fx:id="tfStatus" disable="true" layoutX="271.0" layoutY="105.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="105.0" />
-      <DatePicker fx:id="dpData" layoutX="40.0" layoutY="196.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="40.0" />
+      <TextField fx:id="tfStatus" disable="true" layoutX="271.0" layoutY="130.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="130.0" />
+      <DatePicker fx:id="dpData" layoutX="271.0" layoutY="200.0" prefHeight="25.0" prefWidth="187.0" AnchorPane.bottomAnchor="281.0" AnchorPane.leftAnchor="271.0" />
       <Label layoutX="44.0" layoutY="243.0" prefHeight="17.0" prefWidth="180.0" style="-fx-text-fill: #ADBAC7;" text="Descrição da Tarefa:">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextArea fx:id="lbDescricao" layoutX="39.0" layoutY="271.0" prefHeight="117.0" prefWidth="400.0" promptText="Descreva a sua Tarefa..." AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="39.0" />
-      <Label layoutX="289.0" layoutY="172.0" prefHeight="17.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Grau de importância:">
+      <TextArea fx:id="lbDescricao" layoutX="39.0" layoutY="271.0" prefHeight="117.0" prefWidth="419.0" promptText="Descreva a sua Tarefa..." AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="39.0" />
+      <Label layoutX="43.0" layoutY="176.0" prefHeight="17.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Grau de importância:">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <ComboBox fx:id="cbImportancia" layoutX="289.0" layoutY="196.0" prefWidth="150.0" />
-      <Label layoutX="195.0" layoutY="23.0" prefHeight="48.0" prefWidth="114.0" style="-fx-text-fill: #ADBAC7;" text="Tarefas" textAlignment="CENTER">
+      <ComboBox fx:id="cbImportancia" layoutX="42.0" layoutY="200.0" prefHeight="25.0" prefWidth="187.0" />
+      <Label layoutX="192.0" layoutY="14.0" prefHeight="48.0" prefWidth="114.0" style="-fx-text-fill: #ADBAC7;" text="Tarefas" textAlignment="CENTER">
          <font>
             <Font name="Comic Sans MS" size="27.0" />
          </font>
       </Label>
       <TableView fx:id="tvTarefa" layoutX="472.0" layoutY="47.0" prefHeight="433.0" prefWidth="315.0">
         <columns>
-          <TableColumn fx:id="tcData" prefWidth="65.0" text="Data" />
-          <TableColumn fx:id="tcTarefa" prefWidth="66.0" text="Tarefa" />
-            <TableColumn fx:id="tcImportancia" prefWidth="98.0" text="Importância" />
-            <TableColumn fx:id="tcName" prefWidth="101.0" text="Nome" />
+          <TableColumn fx:id="tcData" prefWidth="101.0" text="Data" />
+          <TableColumn fx:id="tcTarefa" prefWidth="101.0" text="Tarefa" />
+            <TableColumn fx:id="tcName" prefWidth="112.0" text="Nome" />
         </columns>
       </TableView>
-      <TextField fx:id="tfName" layoutX="41.0" layoutY="105.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." />
-      <Label layoutX="41.0" layoutY="82.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Nome:">
+      <TextField fx:id="tfName" layoutX="41.0" layoutY="130.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite..." />
+      <Label layoutX="41.0" layoutY="107.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Nome:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="271.0" layoutY="82.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Status:">
+      <Label layoutX="271.0" layoutY="107.0" prefHeight="21.0" prefWidth="150.0" style="-fx-text-fill: #ADBAC7;" text="Status:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCodigo" editable="false" layoutX="44.0" layoutY="69.0" prefHeight="25.0" prefWidth="62.0" />
+      <Label layoutX="45.0" layoutY="47.0" prefHeight="21.0" prefWidth="62.0" style="-fx-text-fill: #ADBAC7;" text="Código:">
          <font>
             <Font size="15.0" />
          </font>

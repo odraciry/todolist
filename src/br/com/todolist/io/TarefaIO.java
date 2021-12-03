@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,7 +71,7 @@ public class TarefaIO {
 			t.setDataCriacao(LocalDate.parse(vetor[1], padraoData));
 			t.setDataLimite(LocalDate.parse(vetor[2], padraoData));
 			if(!vetor[3].isEmpty()) {
-				t.setDataConcluida(LocalDate.parse(vetor[3]));
+				t.setDataConcluida(LocalDate.parse(vetor[3], padraoData));
 			}
 			int indImportancia = Integer.parseInt(vetor[4]);
 			t.setImportancia(GrauImportancia.values()[indImportancia]);
@@ -86,6 +87,16 @@ public class TarefaIO {
 		buff.close();
 		System.out.println(tarefas.size());
 		return tarefas;
+	}
+	
+	//Reescreve o arquivo 
+	public static void saveTarefas(List<Tarefa> tarefas) throws IOException {
+		File arqTarefas = new File(FILE_TAREFA);
+		FileWriter writer = new FileWriter(arqTarefas);
+		for(Tarefa t : tarefas) {
+			writer.write(t.formatToSave());
+		}
+		writer.close();
 	}
 }
 
