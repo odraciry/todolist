@@ -88,7 +88,7 @@
       <TableView fx:id="tvTarefa" layoutX="472.0" layoutY="47.0" prefHeight="433.0" prefWidth="315.0">
         <columns>
           <TableColumn fx:id="tcData" prefWidth="101.0" text="Data" />
-          <TableColumn fx:id="tcTarefa" prefWidth="101.0" text="Tarefa" />
+          <TableColumn fx:id="tcTarefa" prefWidth="101.0" text="Status" />
             <TableColumn fx:id="tcName" prefWidth="112.0" text="Nome" />
         </columns>
       </TableView>

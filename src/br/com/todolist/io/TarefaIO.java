@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -42,6 +44,7 @@ public class TarefaIO {
 		}
 	}
 	
+	//insere no banco de dados
 	public static void insert(Tarefa tarefa) throws IOException {
 		File arqTarefa = new File(FILE_TAREFA);
 		File arqId = new File(FILE_ID);
@@ -57,6 +60,7 @@ public class TarefaIO {
 		writer.close();
 	}
 	
+	//le o arquivo e devolve a lista dos arquivos 
 	public static List<Tarefa> readTarefa() throws IOException{
 		File arqTarefa = new File(FILE_TAREFA);
 		List<Tarefa> tarefas = new ArrayList<>();
@@ -83,9 +87,13 @@ public class TarefaIO {
 			
 			tarefas.add(t);
 		}
+		
+		// fecha reader
 		reader.close();
+		//fecha buff
 		buff.close();
-		System.out.println(tarefas.size());
+		
+		Collections.sort(tarefas);
 		return tarefas;
 	}
 	
@@ -97,6 +105,13 @@ public class TarefaIO {
 			writer.write(t.formatToSave());
 		}
 		writer.close();
+	}
+	
+	public static long proximoId() throws IOException {
+		Scanner sc = new Scanner(new File(FILE_ID));
+		long proxId = sc.nextLong();
+		sc.close();
+		return proxId;
 	}
 }
 

@@ -26,6 +26,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -56,9 +57,9 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 
 	@FXML
 	private TextField tfCodigo;
-    
+
 	@FXML
-    private Label lbFinalizacao;
+	private Label lbFinalizacao;
 
 	@FXML
 	private TableColumn<Tarefa, LocalDate> tcData;
@@ -153,7 +154,25 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 
 	@FXML
 	void btExcluirClick(ActionEvent event) {
-		limpar();
+
+		if (tarefa != null) {
+			int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir a tarefa '" + tarefa.getName() + "' ?",
+					"Confirmar exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (resposta == 0) {
+				tarefas.remove(tarefa);
+				try {
+					TarefaIO.saveTarefas(tarefas);
+					carregarTarefas();
+					limpar();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null, "Erro ao excluir tarefa: " + e.getMessage(), "Erro",
+							JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Tarefa excluida com sucesso!", "Excluisão bem sucedida",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 	}
 
 	@FXML
@@ -169,23 +188,27 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 			JOptionPane.showMessageDialog(null, "Informe a importâcia da tarefa", "Informe", JOptionPane.ERROR_MESSAGE);
 			cbImportancia.requestFocus();
 		} else {
-			// istanciando a tarefa
-			tarefa = new Tarefa();
-
+			// verifica se a tarefa é nula para instancia-la
+			if (tarefa == null) {
+				// istanciando a tarefa
+				tarefa = new Tarefa();
+				tarefa.setDataCriacao(LocalDate.now());
+				tarefa.setStatus(StatusTarefa.ABERTA);
+			}
 			// popular a tarefa
-			tarefa.setDataCriacao(LocalDate.now());
-			tarefa.setStatus(StatusTarefa.ABERTA);
 			tarefa.setDataLimite(dpData.getValue());
-			
 			tarefa.setDescricao(lbDescricao.getText());
-			
 			tarefa.setImportancia(cbImportancia.getValue());
 			tarefa.setName(tfName.getText());
 
 			System.out.println(tarefa.formatToSave());
 			// TODO inserir no banco de dados
 			try {
-				TarefaIO.insert(tarefa);
+				if (tarefa.getId() == 0) {
+					TarefaIO.insert(tarefa);
+				} else {
+					TarefaIO.saveTarefas(tarefas);
+				}
 				// Limpar os Campos
 				limpar();
 				carregarTarefas();
@@ -217,19 +240,32 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 		tfCodigo.clear();
 		btSalvar.setDisable(false);
 		lbDescricao.setDisable(false);
-		
+		try {
+			tfCodigo.setText(TarefaIO.proximoId() + "");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	
+	// inicializa a tarefa na tabela
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbImportancia.setItems(FXCollections.observableArrayList(GrauImportancia.values()));
-		
+		// mostra o ID da proxima tarefa
+		try {
+			tfCodigo.setText(TarefaIO.proximoId() + "");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		// definir os parametros para as colunas do tableview
 		tcData.setCellValueFactory(new PropertyValueFactory<>("dataLimite"));
 		tcTarefa.setCellValueFactory(new PropertyValueFactory<>("status"));
 		tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+		// adiciona uma celula para a coluna data
 		tcData.setCellFactory(call -> {
 			return new TableCell<Tarefa, LocalDate>() {
 				@Override
@@ -243,12 +279,30 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 				}
 			};
 		});
+		
+		//define as cores das linhas com base no Status da tarefa
+		tvTarefa.setRowFactory(call -> new TableRow<Tarefa>() {
+			protected void updateItem(Tarefa item, boolean empty) {
+				super.updateItem(item, empty);
+				if(item == null) {
+					setStyle("");
+				}else if(item.getStatus() == StatusTarefa.CONCLUIDA) {
+					setStyle("-fx-background-color:#03bb85");
+				}else if(item.getDataLimite().isBefore(LocalDate.now())) {
+					setStyle("-fx-background-color: tomato");
+				}else if(item.getStatus() == StatusTarefa.ADIADA) {
+					setStyle("-fx-background-color:#ffdb58");
+				}else {
+					setStyle("-fx-background-color:#4169E1");
+				}
+			};
+		});
 		// Evento de seleção de item na tabela
 		tvTarefa.getSelectionModel().selectedItemProperty().addListener(this);
 		carregarTarefas();
 	}
-	
-	//carrega as tarefas para serem lidas na parte de editar
+
+	// carrega as tarefas para serem lidas na parte de editar
 	public void carregarTarefas() {
 		try {
 			tarefas = TarefaIO.readTarefa();
@@ -275,7 +329,7 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 			tfCodigo.setText(tarefa.getId() + "");
 			btAdiar.setDisable(true);
 			lbFinalizacao.setText("Data para finalização:");
-			//desabilita os botoes caso status da tarefa for concluida
+			// desabilita os botoes caso status da tarefa for concluida
 			if (tarefa.getStatus() == StatusTarefa.CONCLUIDA) {
 				btAdiar.setDisable(true);
 				btExcluir.setDisable(false);
@@ -285,15 +339,16 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 				lbDescricao.setEditable(false);
 				dpData.setEditable(false);
 				lbFinalizacao.setText("Data de conclusão:");
-				
-				//desabilita o botao adiar caso tarefa ja foi adiada
+
+				// desabilita o botao adiar caso tarefa ja foi adiada
 			} else if (tarefa.getStatus() == StatusTarefa.ADIADA) {
 				btAdiar.setDisable(true);
 				btConcluido.setDisable(false);
-				//habilita todos os botoes
+				// habilita todos os botoes
 			} else {
 				btAdiar.setDisable(false);
 				btConcluido.setDisable(false);
+				btExcluir.setDisable(false);
 			}
 		}
 	}
