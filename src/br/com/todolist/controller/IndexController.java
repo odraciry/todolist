@@ -1,5 +1,6 @@
 package br.com.todolist.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -8,7 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import br.com.todolist.io.TarefaIO;
 import br.com.todolist.model.GrauImportancia;
@@ -19,7 +23,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -31,6 +37,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import sun.awt.RequestFocusController;
 
 public class IndexController implements Initializable, ChangeListener<Tarefa> {
 
@@ -89,10 +100,78 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 	private Tarefa tarefa;
 
 	@FXML
+	void exportar(ActionEvent event) {
+		FileFilter filter = new FileNameExtensionFilter("Arquivos HTML", "html", "htm");
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(filter);
+		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			File arqSelecionado = chooser.getSelectedFile();
+			if (!arqSelecionado.getAbsolutePath().endsWith(".html")) {
+				arqSelecionado = new File(arqSelecionado + ".html");
+			}
+			try {
+				TarefaIO.exportHtml(tarefas, arqSelecionado);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	void sair(ActionEvent event) {
+		// fechando o programa
+		int decisao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Fechar o programa",
+				JOptionPane.YES_NO_OPTION);
+		// sim = 0 (entao fecha o programa), nao = 1 (nao fecha)
+		if (decisao == 0)
+			System.exit(0);
+
+	}
+
+	@FXML
+	void sobre(ActionEvent event) {
+		AnchorPane root;
+		try {
+			root = (AnchorPane) FXMLLoader.load(getClass().getResource("/br/com/todolist/view/Sobre.fxml"));
+			Scene scene = new Scene(root, 400, 400);
+			scene.getStylesheets()
+					.add(getClass().getResource("/br/com/todolist/view/application.css").toExternalForm());
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void ajuda(ActionEvent event) {
+
+	}
+
+	@FXML
+	void arquivo(ActionEvent event) {
+
+	}
+
+	@FXML
 	void btAdiarClick(ActionEvent event) {
 		if (tarefa != null) {
-			int dias = Integer.parseInt(JOptionPane.showInputDialog(null, "Quantos dias você deseja adiar?",
-					"Informe quantos dias", JOptionPane.QUESTION_MESSAGE));
+			int dias;
+			do {
+				dias = Integer.parseInt(JOptionPane.showInputDialog(null, "Quantos dias você deseja adiar?",
+						"Informe quantos dias", JOptionPane.QUESTION_MESSAGE));
+
+				if (dias < 1)
+					JOptionPane.showMessageDialog(null, "Informe um número válido", "Informe",
+							JOptionPane.ERROR_MESSAGE);
+
+			} while (dias < 1);
+
 			// acrescenta dias escolhido na data limite e cria uma nova data
 			LocalDate novaData = tarefa.getDataLimite().plusDays(dias);
 			// substitui a data limite
@@ -115,6 +194,7 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 						JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
+
 		}
 	}
 
@@ -279,20 +359,20 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 				}
 			};
 		});
-		
-		//define as cores das linhas com base no Status da tarefa
+
+		// define as cores das linhas com base no Status da tarefa
 		tvTarefa.setRowFactory(call -> new TableRow<Tarefa>() {
 			protected void updateItem(Tarefa item, boolean empty) {
 				super.updateItem(item, empty);
-				if(item == null) {
+				if (item == null) {
 					setStyle("");
-				}else if(item.getStatus() == StatusTarefa.CONCLUIDA) {
+				} else if (item.getStatus() == StatusTarefa.CONCLUIDA) {
 					setStyle("-fx-background-color:#03bb85");
-				}else if(item.getDataLimite().isBefore(LocalDate.now())) {
+				} else if (item.getDataLimite().isBefore(LocalDate.now())) {
 					setStyle("-fx-background-color: tomato");
-				}else if(item.getStatus() == StatusTarefa.ADIADA) {
+				} else if (item.getStatus() == StatusTarefa.ADIADA) {
 					setStyle("-fx-background-color:#ffdb58");
-				}else {
+				} else {
 					setStyle("-fx-background-color:#4169E1");
 				}
 			};
@@ -344,6 +424,7 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 			} else if (tarefa.getStatus() == StatusTarefa.ADIADA) {
 				btAdiar.setDisable(true);
 				btConcluido.setDisable(false);
+				btExcluir.setDisable(false);
 				// habilita todos os botoes
 			} else {
 				btAdiar.setDisable(false);

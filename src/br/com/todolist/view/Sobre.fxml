@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #2D333B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.todolist.controller.SobreController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="125.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/tarefa.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="80.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="Tec. Desenvolvimento de Sistemas" wrappingWidth="239.048828125">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="70.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="Desenvolvido por: Ricardo Silva." wrappingWidth="279.048828125">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="80.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="Senai Ricardo Lerner 10/2021" wrappingWidth="219.048828125">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="133.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="ToDoList" wrappingWidth="133.048828125">
+         <font>
+            <Font name="Comic Sans MS Italic" size="27.0" />
+         </font>
+      </Text>
+      <Button fx:id="btOk" layoutX="158.0" layoutY="347.0" mnemonicParsing="false" onAction="#btOkClick" prefHeight="39.0" prefWidth="83.0" style="-fx-background-color: #4E5BA6; -fx-text-fill: black;" text="OK">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font></Button>
+      <Text layoutX="70.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="Um programa para suas tarefas" wrappingWidth="270.048828125">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

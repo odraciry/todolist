@@ -4,6 +4,9 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -109,5 +112,20 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <MenuBar layoutX="14.0" layoutY="2.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" onAction="#arquivo" text="Arquivo">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exportar" text="Exportar como HTML" />
+                  <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" onAction="#ajuda" text="Ajuda">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#sobre" text="Sobre" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
