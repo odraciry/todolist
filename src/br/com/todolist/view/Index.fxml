@@ -117,6 +117,7 @@
           <Menu mnemonicParsing="false" onAction="#arquivo" text="Arquivo">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#exportar" text="Exportar como HTML" />
+                  <MenuItem mnemonicParsing="false" onAction="#resetar" text="Resetar Tarefas" />
                   <MenuItem mnemonicParsing="false" onAction="#sair" text="Sair" />
             </items>
           </Menu>

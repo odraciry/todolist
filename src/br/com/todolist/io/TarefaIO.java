@@ -18,6 +18,7 @@ import java.util.Scanner;
 import br.com.todolist.model.GrauImportancia;
 import br.com.todolist.model.StatusTarefa;
 import br.com.todolist.model.Tarefa;
+import sun.invoke.empty.Empty;
 import sun.misc.ObjectInputFilter.Status;
 
 public class TarefaIO {
@@ -25,6 +26,7 @@ public class TarefaIO {
 	private static final String FILE_ID = FOLDER + "/id.csv";
 	private static final String FILE_TAREFA = FOLDER + "/tarefas.csv";
 
+	// cria o arquivo das tarefas e do ID
 	public static void creatFiles() {
 		try {
 			File folder = new File(FOLDER);
@@ -39,9 +41,20 @@ public class TarefaIO {
 				writer.write("1");
 				writer.close();
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void resetFile() {
+		File folder = new File(FOLDER);
+		File fileId = new File(FILE_ID);
+		File fileTarefa = new File(FILE_TAREFA);
+		System.out.println(fileId.delete());
+		System.out.println(fileTarefa.delete());
+		System.out.println(folder.delete());
+		creatFiles();
 	}
 
 	// insere no banco de dados
@@ -118,21 +131,17 @@ public class TarefaIO {
 		FileWriter writer = new FileWriter(arquivo);
 		writer.write("<html>\n");
 		writer.write("<head>\n");
-		writer.write("<style>\n"
-				+ "*{"
-				+ "background-color:cyan;"
-				+ "font-family: arial;"
-				+ "}"
-				+ ""
-				+ "</style>\n");
+		writer.write("<style>\n" + "*{" + "background-color:7f89df;" + "font-family: arial;" + "}" + "ul, h1, li{"
+				+ "text-align:center;" + "}" + "" + "</style>\n");
 		writer.write("</head>\n");
 		writer.write("<body>\n");
 		writer.write("<h1>Lista de Tarefas</h1>\n");
 		writer.write("<ul>\n");
-		for(Tarefa tarefa : tarefas) {
-			writer.write("<li>"+tarefa.getDataLimite()+" - "+tarefa.getDescricao()+"</li>\n");
+		for (Tarefa tarefa : tarefas) {
+			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MMMM/yyyy");
+			writer.write("<li>" + tarefa.getDataLimite().format(fmt) + " - " + tarefa.getName() + "</li>\n");
 		}
-		
+
 		writer.write("</ul>\n");
 		writer.write("</body>\n");
 		writer.write("</html>");

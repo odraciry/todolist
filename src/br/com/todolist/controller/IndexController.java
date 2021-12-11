@@ -147,6 +147,12 @@ public class IndexController implements Initializable, ChangeListener<Tarefa> {
 			e.printStackTrace();
 		}
 	}
+	
+	 @FXML
+	 void resetar(ActionEvent event) {
+		// resetar tarefas e IDs
+		TarefaIO.resetFile();
+	 }
 
 	@FXML
 	void ajuda(ActionEvent event) {

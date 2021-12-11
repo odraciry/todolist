@@ -21,6 +21,7 @@ public class Main extends Application {
 			primaryStage.setTitle("ToDo List");
 			primaryStage.getIcons().add(new Image("/br/com/todolist/imagem/tarefa.png"));
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

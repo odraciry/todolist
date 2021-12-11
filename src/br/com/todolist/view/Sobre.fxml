@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="125.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Downloads/tarefa.png" />
+            <Image url="@../imagem/tarefa.png" />
          </image>
       </ImageView>
       <Text layoutX="80.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ADBAC7;" text="Tec. Desenvolvimento de Sistemas" wrappingWidth="239.048828125">
